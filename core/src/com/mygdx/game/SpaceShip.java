@@ -13,7 +13,7 @@ public class SpaceShip extends BaseActor {
     private Thrusters thrusters;
     private Shield shield;
     public int shieldPower;
-    private List<Laser> lasers;
+
 
     public SpaceShip(float x, float y, Stage s) {
         super(x, y, s);
@@ -35,7 +35,6 @@ public class SpaceShip extends BaseActor {
         shield.centerAtPosition(getWidth() / 2, getHeight() / 2);
         shieldPower = 100;
 
-        lasers = new ArrayList<>();
     }
 
     @Override
@@ -82,16 +81,12 @@ public class SpaceShip extends BaseActor {
             return;
 
         Laser laser = new Laser(0, 0, this.getStage());
-        lasers.add(laser);
         laser.centerAtActor(this);
         laser.setRotation(this.getRotation());
         laser.setMotionAngle(this.getRotation());
 
     }
 
-    public List<Laser> getLasers() {
-        return lasers;
-    }
 
 
 

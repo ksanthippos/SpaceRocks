@@ -355,7 +355,8 @@ public class BaseActor extends Group {
     public static Rectangle getWorldBounds() { return worldBounds; }
 
 
-    // this method works with: BaseActor.getList(mainStage, CLASSNAME_HERE.class.getCanonicalName ()),
+    // ------------------------------
+    // IMPORTANT!! these two methods have to be called: BaseActor.getList(mainStage, CLASSNAME_HERE.class.getCanonicalName())
     public static ArrayList<BaseActor> getList(Stage stage, String className) {
 
         ArrayList<BaseActor> list = new ArrayList<>();
@@ -376,10 +377,10 @@ public class BaseActor extends Group {
         return list;
     }
 
-    // this method works with: BaseActor.count(mainStage, CLASSNAME_HERE.class.getSimpleName ()),
     public static int count(Stage stage, String className) {
         return getList(stage, className).size();
     }
+    // ------------------------------
 
 
     // ***********************

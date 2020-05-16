@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.compression.lzma.Base;
 
 import java.util.ArrayList;
@@ -11,10 +12,10 @@ import java.util.List;
 public class LevelScreen extends BaseScreen {
 
     private SpaceShip spaceship;
-    private List<Rock> rocks;
     private boolean gameOver;
 
     public void initialize() {
+
         BaseActor space = new BaseActor(0, 0, mainStage);
         space.loadTexture("space.png");
         space.setSize(800, 600);
@@ -22,16 +23,14 @@ public class LevelScreen extends BaseScreen {
 
         spaceship = new SpaceShip(400, 300, mainStage);
 
-        rocks = new ArrayList<>();
-
-        rocks.add(new Rock(600, 500, mainStage));
-        rocks.add(new Rock(600, 300, mainStage));
-        rocks.add(new Rock(600, 100, mainStage));
-        rocks.add(new Rock(400, 100, mainStage));
-        rocks.add(new Rock(400, 500, mainStage));
-        rocks.add(new Rock(200, 300, mainStage));
-        rocks.add(new Rock(200, 500, mainStage));
-        rocks.add(new Rock(200, 100, mainStage));
+        new Rock(600, 500, mainStage);
+        new Rock(600, 300, mainStage);
+        new Rock(600, 100, mainStage);
+        new Rock(400, 100, mainStage);
+        new Rock(400, 500, mainStage);
+        new Rock(200, 300, mainStage);
+        new Rock(200, 500, mainStage);
+        new Rock(200, 100, mainStage);
 
         gameOver = false;
 
@@ -48,6 +47,14 @@ public class LevelScreen extends BaseScreen {
                     boom.centerAtActor(spaceship);
                     spaceship.remove();
                     spaceship.setPosition(-1000, -1000);
+
+                    BaseActor messageLose = new BaseActor(0, 0, uiStage);
+                    messageLose.loadTexture("message-lose.png");
+                    messageLose.centerAtPosition(400, 300);
+                    messageLose.setOpacity(0);
+                    messageLose.addAction(Actions.fadeIn(1));
+                    gameOver = true;
+
                 }
                 else {
                     spaceship.shieldPower -= 34;
@@ -67,6 +74,13 @@ public class LevelScreen extends BaseScreen {
             }
         }
 
+        if (!gameOver && BaseActor.count(mainStage, Rock.class.getCanonicalName()) == 0) {
+            BaseActor messageWin = new BaseActor(0, 0, uiStage);
+            messageWin.loadTexture("message-win.png");
+            messageWin.centerAtPosition(400, 300);
+            messageWin.setOpacity(0);
+            messageWin.addAction(Actions.fadeIn(1));
+        }
     }
 
     @Override
