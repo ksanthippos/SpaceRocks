@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Input;
+
 public class LevelScreen extends BaseScreen {
 
     private SpaceShip spaceship;
@@ -22,4 +24,13 @@ public class LevelScreen extends BaseScreen {
     public void dispose() {
         super.dispose();
     }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        if (keycode == Input.Keys.X)
+            spaceship.warp();
+
+        return false;
+    }
+
 }

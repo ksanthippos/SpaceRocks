@@ -9,11 +9,12 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class BaseActor extends Actor {
+public class BaseActor extends Group {
 
     private Animation<TextureRegion> animation;
     private float elapsedTime;
@@ -55,7 +56,7 @@ public class BaseActor extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
+
         Color c = getColor();
         batch.setColor(c.r, c.g, c.b, c.a);
 
@@ -63,6 +64,7 @@ public class BaseActor extends Actor {
             batch.draw(animation.getKeyFrame(elapsedTime), getX(), getY(), getOriginX(), getOriginY(),
                     getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
         }
+        super.draw(batch, parentAlpha);
     }
 
     // ANIMATION
