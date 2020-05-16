@@ -14,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.*;
+
 public class BaseActor extends Group {
 
     private Animation<TextureRegion> animation;
@@ -352,6 +354,30 @@ public class BaseActor extends Group {
 
     public static Rectangle getWorldBounds() { return worldBounds; }
 
+    //THESE NOT WORKING FOR SOME REASON..
+    public static ArrayList<BaseActor> getList(Stage stage, String className) {
+
+        ArrayList<BaseActor> list = new ArrayList<>();
+        Class theClass = null;
+        try {
+            theClass = Class.forName(className);
+        }
+        catch (Exception error) {
+            error.printStackTrace();
+        }
+
+        for (Actor a: stage.getActors()) {
+            if (theClass != null && theClass.isInstance(a)) {
+                list.add((BaseActor) a);
+            }
+        }
+
+        return list;
+    }
+
+    public static int count(Stage stage, String className) {
+        return getList(stage, className).size();
+    }
 
 
     // ***********************

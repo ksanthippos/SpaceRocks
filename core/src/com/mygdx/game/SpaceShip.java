@@ -5,11 +5,15 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SpaceShip extends BaseActor {
 
     private Thrusters thrusters;
     private Shield shield;
-    private int shieldPower;
+    public int shieldPower;
+    private List<Laser> lasers;
 
     public SpaceShip(float x, float y, Stage s) {
         super(x, y, s);
@@ -30,6 +34,8 @@ public class SpaceShip extends BaseActor {
         addActor(shield);
         shield.centerAtPosition(getWidth() / 2, getHeight() / 2);
         shieldPower = 100;
+
+        lasers = new ArrayList<>();
     }
 
     @Override
@@ -58,6 +64,7 @@ public class SpaceShip extends BaseActor {
         
     }
 
+    // ship abilities
     public void warp() {
         if (getStage() == null) // in case if spaceship is removed from stage (= destroyed)
             return;
@@ -68,6 +75,22 @@ public class SpaceShip extends BaseActor {
         Warp warp2 = new Warp(0, 0, this.getStage());
         warp2.centerAtActor(this);
 
+    }
+
+    public void shoot() {
+        if (getStage() == null) // in case if spaceship is removed from stage (= destroyed)
+            return;
+
+        Laser laser = new Laser(0, 0, this.getStage());
+        lasers.add(laser);
+        laser.centerAtActor(this);
+        laser.setRotation(this.getRotation());
+        laser.setMotionAngle(this.getRotation());
+
+    }
+
+    public List<Laser> getLasers() {
+        return lasers;
     }
 
 
