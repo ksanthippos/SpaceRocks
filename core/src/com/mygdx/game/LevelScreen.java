@@ -40,7 +40,7 @@ public class LevelScreen extends BaseScreen {
     @Override
     public void update(float dt) {
 
-        for (BaseActor rockActor: BaseActor.getList(mainStage, "Rock")) {
+        for (BaseActor rockActor: BaseActor.getList(mainStage, Rock.class.getCanonicalName())) {
 
             if (rockActor.overlaps(spaceship)) {
                 if (spaceship.shieldPower <= 0) {
@@ -57,7 +57,7 @@ public class LevelScreen extends BaseScreen {
                 }
             }
 
-            for (BaseActor laserActor: BaseActor.getList(mainStage, "Laser")) {
+            for (BaseActor laserActor: BaseActor.getList(mainStage, Laser.class.getCanonicalName())) {
                 if (laserActor.overlaps(rockActor)) {
                     Explosion boom = new Explosion(0, 0, mainStage);
                     boom.centerAtActor(rockActor);
@@ -67,39 +67,6 @@ public class LevelScreen extends BaseScreen {
             }
         }
 
-
-/*        Iterator iterator = rocks.iterator();
-        while (iterator.hasNext()) {
-            Rock rockActor = (Rock) iterator.next();
-            if (rockActor.overlaps(spaceship)) {
-                if (spaceship.shieldPower <= 0) {
-                    Explosion boom = new Explosion(0, 0, mainStage);
-                    boom.centerAtActor(spaceship);
-                    spaceship.remove();
-                    spaceship.setPosition(-1000, -1000);
-                }
-                else {
-                    spaceship.shieldPower -= 34;
-                    Explosion boom = new Explosion(0, 0, mainStage);
-                    boom.centerAtActor(spaceship);
-                    iterator.remove();
-                    rockActor.setPosition(-1000, -1000);
-                }
-            }
-
-            Iterator iterator1 = spaceship.getLasers().iterator();
-            while (iterator1.hasNext()) {
-            BaseActor laserActor = (Laser) iterator1.next();
-                if (laserActor.overlaps(rockActor)) {
-                    Explosion boom = new Explosion(0, 0, mainStage);
-                    boom.centerAtActor(rockActor);
-                    iterator.remove();
-                    iterator1.remove();
-                    laserActor.setPosition(-1000, -1000);
-                    rockActor.setPosition(-1000, -1000);
-                }
-            }
-        }*/
     }
 
     @Override
